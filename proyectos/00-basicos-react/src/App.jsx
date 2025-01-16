@@ -10,6 +10,7 @@ import Padre from "./components/UseStage/props/Padre"
 import RegistrarFormulario from "./components/UseStage/RegistrarFormulario"
 import Timer from "./components/useEffectCicloVida/Timer"
 import CardPlaceHolder from "./components/useEffectCicloVida/CardPlaceHolder.jsx"
+import ProductList from "./components/useEffect/ProductList.jsx"
 
 const App = () => {
   const [counter, setCounter] = useState(0);
@@ -39,9 +40,10 @@ const App = () => {
     </Padre2>
     <hr className="mt-10"/>
     <Timer/>
+    <CardPlaceHolder />
     */}
      <hr className="mt-10"/>
-      <CardPlaceHolder />
+     <ProductList/>
     </>
   )
 }

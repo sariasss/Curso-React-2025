@@ -1,31 +1,23 @@
 import React from 'react'
 
-//Lista de productos renderizados
+const ProductCard = (props) => {
+    const { product, addCart } = props;
 
-const productCard = () => {
-    const [products, setProducts] = useState([])
-    const [cart, setCart] = useState([])
-
-    const fetchProducts = async () => {
-        try {
-            const response = await fetch("http://localhost:5173/src/data/db.json")
-            if(!response.ok){
-                throw new Error("Error al obtener la data: ", error);
-            }
-            setProducts(await response.json());
-        } catch (error) {
-            console.error(error)
-        }
+    const handleClick = () => {
+        addCart(product);
     }
 
-    useEffect(() => {
-        fetchProducts();
-    })
-    
-
   return (
-    <div>productCard</div>
+    <div className='bg-white shadow-lg rounded-lg p-6 flex flex-col justify-between mb-5'>
+        <h2 className='text-xl font-bold'>{product.name}</h2>
+        <p className='text-gray-600 mb-4'>{product.price}</p>
+        <button 
+            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300'
+            onClick={handleClick}
+        >
+            Añadir al carito</button>
+    </div>
   )
 }
 
-export default productCard
+export default ProductCard
