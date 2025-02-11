@@ -6,7 +6,7 @@ export const MovieCard = ({ movie }) => {
   console.log(movie);
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "N/A";
   return (
-    <Link to={`/movie/${movie.id}`} className="bg-sky-800">
+    <Link to={`/movie/${movie.id}`} className="bg-gray-200 rounded rounded-md">
       <article className="card transform transition-transform duration-300 hover:scale-105">
         <div className="relative aspect-[2/3]">
           <img
@@ -19,8 +19,8 @@ export const MovieCard = ({ movie }) => {
           </div>
         </div>
         <div className="p-4">
-          <h3 className="font-bold text-lg line-clamp-2 text-white">{movie.title}</h3>
-          <p className="text-sm text-gray-200 line-clamp-2" >
+          <h3 className="font-bold text-lg line-clamp-2 text-black">{movie.title}</h3>
+          <p className="text-sm text-gray-800 line-clamp-2" >
             {movie.release_date}
           </p>
         </div>

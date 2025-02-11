@@ -10,6 +10,7 @@ import Review from "../pages/Review";
 import Favourites from "../pages/Favourites";
 */
 
+
 export const router = createBrowserRouter([
     {
         path:"/",
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
             element: <MovieList />
         },
         {
-            path: "movies/:id",
+            path: "movie/:id",
             element: <MovieDetail />
         }
         /*,

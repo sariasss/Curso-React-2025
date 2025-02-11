@@ -3,6 +3,7 @@ import { useFetch } from "../hook/useFetch";
 import { getPopularMovies } from "../services/tmdb";
 import { Link } from "react-router-dom";
 import { MovieCard } from "../components/MovieCard";
+import { BeatLoader } from "react-spinners";
 
 const Home = () => {
 //estado para el numero de pagina
@@ -11,7 +12,11 @@ const Home = () => {
     const { data, loading, error } = useFetch(()=>getPopularMovies(page), [page]);
     //que pasa con el scroll
 
-
+    const handlePageChange = (newPage) => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setPage(newPage);
+      };
+    
 
     //si esta cargando???
     if(error){
@@ -25,31 +30,52 @@ const Home = () => {
     }
     return (
         <div className="space-y-8">
-            <header className="text-center">
-                <h1 className="text-4xl font-bold text-sky-950">Bienvenido al VideoClub</h1>
-                <p className="text-lg font-medium text-sky-900 mt-2">Descubre las peliculas más populares del momento</p>
-            </header>
-            {/**Seccion de peliculas populares */}
-            <section>
-                <h2 className="text-2xl font-bold text-sky-950">Peliculas Populares</h2>
-                {loading ?
-                 (<div>Cargando Películas...</div>)
-                :(
-                    <>
-                    {
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6">
-                            {data?.results?.map(movie=>( //sea lo que sea que sea hay que pasar la key
-                                //aqui va el componente movieCard
-                                <MovieCard key={movie.id} movie={movie}/>
-                            ))}
-                        </div>
-                    }
-                    </>
-                )
-                } {/*poner spinner*/}
-            </section>
+          <header className="text-center">
+            <h1 className="text-4xl font-bold text-sky-950">Bienvenido a Videoclub</h1>
+            <p className="text-lg font-medium text-sky-900 mt-2">Descubre las películas más populares del momento</p>
+          </header>
+          {/* sección de películas populares */}
+          <section>
+            <h2 className="text-2xl font-bold text-sky-950 mb-10">
+              Películas Populares
+            </h2>
+            {loading ? (
+                <BeatLoader color="#052F4A" />
+            ) : (
+              <>
+                {/* grid de las películas */}
+                <div
+                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
+                xl:grid-cols-5 gap-6"
+                >
+                  {data?.results?.map((movie) => (
+                    // aquí va el componente MovieCard
+                    <MovieCard key={movie.id} movie={movie} />
+                  ))}
+                </div>
+                {/* Paginación  */}
+                <div className="flex justify-center mt-8 gap-2">
+                  <button
+                    onClick={() => handlePageChange(page - 1)}
+                    className=" text-white px-4 py-2 rounded-lg transition-colors duration-200 bg-sky-800 hover:bg-sky-950"
+                    disabled={page ===1}
+                  >
+                    Anterior
+                  </button>
+                  <span></span>
+                  <button
+                    onClick={() => handlePageChange(page + 1)}
+                    className="text-white px-4 py-2 rounded-lg transition-colors duration-200 bg-sky-800 hover:bg-sky-950"
+                    disabled={page === data?.total_pages}
+                  >
+                    Siguiente
+                  </button>
+                </div>
+              </>
+            )}
+          </section>
         </div>
-    )
-}
-
-export default Home
+      );
+    };
+    
+    export default Home;
