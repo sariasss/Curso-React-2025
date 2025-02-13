@@ -9,6 +9,7 @@ import FavoritesPage from "../pages/FavoritesPage";
 import AboutPage from "../pages/AboutPage";
 import PokemonDetailPage from "../pages/PokemonDetailPage";
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 export const router = createBrowserRouter([
     { //cada uno es una ruta
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
                 errorElement:<ErrorPage />,
                 //loader: permite hacer un fect directamente en la ruta
                 loader: async ({ params }) => {
-                    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.name}`);
+                    const response = await fetch(`${VITE_API_URL}/${params.name}`);
                     if(!response.ok){
                         throw new Error("Pokemon not found");
                     }

@@ -6,11 +6,10 @@ const RootLayaout = () => {
   return (
     <>
     <div className="min-h-screen bg-gray-100">
-      <Navbar>
+      <Navbar />
         <main className="">
           <Outlet />
         </main>
-      </Navbar>
     </div>
     </>
   )

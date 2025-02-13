@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner"
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 const SearchPage = () => {
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
@@ -12,7 +14,7 @@ const SearchPage = () => {
     //busqueda con nombre en la API
 
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${search.toLocaleLowerCase()}`)
+        const response = await fetch(`${VITE_API_URL}/${search.toLocaleLowerCase()}`)
         if(!response.ok){
             throw new Error("Error data")
         }

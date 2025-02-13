@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { usePokemon } from "../context/PokemonContext";
 import Spinner from "../components/Spinner";
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 const Home = () => {
     const [ pokemons, setPokemons ] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +16,7 @@ const Home = () => {
 
     const fetchPokemons = async () =>{
         try {
-            const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=20");
+            const response = await fetch(`${VITE_API_URL}`);
             if(!response.ok){
                 throw new Error("Error al obtener los pokemons");
             }
